@@ -10,7 +10,7 @@ import {
 import { extensionId } from "./Constants";
 import Copy from "@spectrum-icons/workflow/Copy";
 
-export default ModalComponent = () => {
+const Modal = () => {
   const [guestConnection, setGuestConnection] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -44,6 +44,7 @@ export default ModalComponent = () => {
             </Content>
         </Provider> : <Content>Loading....</Content>
     );
- }
-    
-  
+}
+
+
+export default Modal;
