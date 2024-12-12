@@ -74,42 +74,15 @@ const Modal = () => {
           const {owner, repo}  = res;
           const branch = 'no-worker';
           const url = `https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live`
-          setCodeSnippet(`
-  <main>
-    <div class="form">
-      <a href=\`https://${branch}--${repo}--${owner}.hlx.live${params.formPath}\` style="all: unset">Loading Form...</a>
-    </div>
-  </main>
+          setCodeSnippet(`<div class="form"></div>
   <script type="module">
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('href',\`${url}/blocks/form/form.css\`);
-    document.head.appendChild(link);
-    const formBlock = document.querySelector('.form');
-    const module = await import(\`${url}/blocks/form/form.js\`);
-    const formDecorate = module.default;
-    formDecorate(formBlock)
+    const module = await import(\`https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live/blocks/form/form.js\`);
+    module.exportForm(\`https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live${params.formPath}\`, document.querySelector('.form'))
   </script>`)
           if(res.error) {
               console.error("Error fetching EDS conf info", res.error)
           }
 
-          // const formName = params.formPath.split("/")[4];
-          // const formName = params.formPath.split("/content/forms/af/")[1].split("/jcr:content/root/section/form")[0]
-          //   try {
-          //       const edsInfo = await fetch(params.endpoint+`/conf/forms/${formName}/settings/cloudconfigs/edge-delivery-service-configuration/jcr:content.-1.json`, {
-          //           method: "GET"
-          //       });
-          //       console.log(edsInfo)
-          //       const confNode = await edsInfo.json();
-          //       console.log(confNode)
-          //       const obj = {}
-          //       obj.owner = confNode.owner;
-          //       obj.repo = confNode.repo;
-          //       setEdsInfo(obj)
-          //   } catch (e) {
-          //       console.error("Error fetching EDS conf info", e)
-          //   }
       } finally {
           setLoading(false);
       }
