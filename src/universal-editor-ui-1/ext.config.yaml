@@ -10,16 +10,20 @@ hooks:
   post-app-deploy: ./hooks/post-deploy.js
 runtimeManifest:
   packages:
-    universal-editor-richtext-draft:
+    embed:
       license: Apache-2.0
       actions:
-        save-draft:
-          function: actions/save-draft/index.js
+        fetch-conf:
+          function: actions/fetch-conf/index.js
           web: 'yes'
           runtime: nodejs:18
           inputs:
             LOG_LEVEL: debug
             UNIVERSAL_EDITOR_URL: $UNIVERSAL_EDITOR_URL
-          annotations:
-            require-adobe-auth: true
-            final: true
+        sample-action:
+          function: actions/sample-action/index.js
+          web: 'yes'
+          runtime: nodejs:18
+          inputs:
+            LOG_LEVEL: debug
+            UNIVERSAL_EDITOR_URL: $UNIVERSAL_EDITOR_URL
