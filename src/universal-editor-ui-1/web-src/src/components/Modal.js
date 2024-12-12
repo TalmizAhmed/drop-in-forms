@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useRef} from "react";
 import { attach } from "@adobe/uix-guest";
 import {
-  Provider,
-  Content,
-  defaultTheme,
-  Button,
-  Text,
+    Provider,
+    Content,
+    defaultTheme,
+    Button,
+    Text,
     TextArea
 } from "@adobe/react-spectrum";
 import { extensionId } from "./Constants";
@@ -99,7 +99,7 @@ const Modal = () => {
     return (
         !loading ? <Provider theme={defaultTheme} colorScheme="light">
             <Content width="100%">
-                <TextArea label="Code Snippet" width="size-4600" height="size-1700" maxWidth="100%" ref={codeSnippetArea} onChange={setCodeSnippet} value={codeSnippet}></TextArea>
+                <TextArea label="Code Snippet" isReadOnly width="size-4600" height="size-1700" maxWidth="100%" ref={codeSnippetArea} onChange={setCodeSnippet} value={codeSnippet}></TextArea>
                 <Button variant="accent" onPress={onCopyHandler} position="fixed" bottom="0px" right="100px" >
                   <Copy />
                   <Text>Copy to Clipboard</Text>
