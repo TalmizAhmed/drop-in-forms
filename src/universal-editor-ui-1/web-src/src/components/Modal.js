@@ -12,7 +12,6 @@ import { extensionId } from "./Constants";
 import Copy from "@spectrum-icons/workflow/Copy";
 import actionWebInvoke from '../utils';
 import allActions from '../config.json'
-import fetch from "node-fetch";
 
 const Modal = () => {
   const [guestConnection, setGuestConnection] = useState(null);
@@ -55,7 +54,7 @@ const Modal = () => {
               connections[key].startsWith("xwalk:")
           )[0];
 
-            let token;
+          let token;
           if (customTokens && customTokens[tempEndpointName]) {
               token = customTokens[tempEndpointName];
           } else {
@@ -70,19 +69,17 @@ const Modal = () => {
           };
 
           const res = await actionWebInvoke(allActions['fetch-conf'], headers, params);
-          console.log(res)
           const {owner, repo}  = res;
           const branch = 'no-worker';
           const url = `https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live`
           setCodeSnippet(`<div class="form"></div>
-  <script type="module">
-    const module = await import(\`https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live/blocks/form/form.js\`);
-    module.exportForm(\`https://${branch}--${repo}--${owner.toLowerCase()}.hlx.live${params.formPath}\`, document.querySelector('.form'))
-  </script>`)
+<script type="module">
+    const module = await import(\`${url}/blocks/form/form.js\`);
+    module.exportForm(\`${url}${params.formPath}\`, document.querySelector('.form'))
+</script>`)
           if(res.error) {
               console.error("Error fetching EDS conf info", res.error)
           }
-
       } finally {
           setLoading(false);
       }
@@ -99,7 +96,7 @@ const Modal = () => {
     return (
         !loading ? <Provider theme={defaultTheme} colorScheme="light">
             <Content width="100%">
-                <TextArea label="Code Snippet" isReadOnly width="size-4600" height="size-1700" maxWidth="100%" ref={codeSnippetArea} onChange={setCodeSnippet} value={codeSnippet}></TextArea>
+                <TextArea label="Code Snippet" isReadOnly width="size-4600" height="size-1700" minWidth="100%" ref={codeSnippetArea} onChange={setCodeSnippet} value={codeSnippet}></TextArea>
                 <Button variant="accent" onPress={onCopyHandler} position="fixed" bottom="0px" right="100px" >
                   <Copy />
                   <Text>Copy to Clipboard</Text>

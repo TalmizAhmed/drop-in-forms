@@ -10,7 +10,6 @@ import React from "react";
 import ErrorBoundary from "react-error-boundary";
 import {HashRouter as Router, Routes, Route} from "react-router-dom";
 import ExtensionRegistration from "./ExtensionRegistration";
-import RichTextDraftsRail from "./RichTextDraftsRail";
 import Modal from "./Modal";
 
 function App() {
@@ -32,10 +31,9 @@ function App() {
         </Router>
     )
 
-    // Methods
 
-    // error handler on UI rendering failure
     function onError(e, componentStack) {
+        console.error(e, componentStack)
     }
 
     // component to show if UI fails rendering

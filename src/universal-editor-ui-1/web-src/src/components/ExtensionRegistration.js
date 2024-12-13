@@ -24,11 +24,13 @@ function ExtensionRegistration() {
                         label: "Export form",
                         icon: 'ExperienceExport', // Spectrum workflow icon code from https://spectrum.adobe.com/page/icons/
                         onClick: async () => {
-                          console.log('Button has been pressed.');      
+                          console.log('Button has been pressed.');
                           const url = '/#/modal/drop'; // absolute or relative path
                           guestConnection.host.modal.showUrl({
                             title: 'Export and Drop In Anywhere: ',
                             url,
+                            width: '1200px',
+                            height: '200px',
                           });
                         },
                       }
